@@ -63,9 +63,12 @@ WHERE stopb.name = 'Craiglockhart'
 --10. Find the routes involving two buses that can go from Craiglockhart to Sighthill.
 -- Show the bus no. and company for the first bus, the name of the stop for the transfer,
 -- and the bus no. and company for the second bus.
-
-
-
-
+-- select * from stops where name in ('Craiglockhart', 'Lochend');
+select r1.num, r1.company, s.name, r4.num, r4.company 
+from route r1 join route r2 on r1.num = r2.num and r1.company = r2.company 
+              join route r3 on r2.stop = r3.stop 
+              join stops s  on r2.stop = s.id
+              join route r4 on r3.num = r4.num and r3.company = r4.company
+where r1.stop = 53 and r4.stop=147;
 
 
