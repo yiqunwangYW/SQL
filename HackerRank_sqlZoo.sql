@@ -10,7 +10,7 @@ SELECT CASE WHEN A + B > C AND B + C > A AND A + C > B THEN
 FROM TRIANGLES;
 
 -- sqlzoo
---# SELECT-----------SELECT-----------SELECT-----------SELECT-----------
+--# SELECT-------------------------------------------------------------
   
 SELECT name FROM world  WHERE name LIKE 'C%ia';
   
@@ -41,16 +41,13 @@ select name, round(gdp/population, -3) as percapitaGDP from world where gdp> 100
 SELECT name, capital from world 
  where LEFT(name,1)=LEFT(capital,1) AND NAME<>CAPITAL;
  
---# 8. Show the Physics winners for 1980 together with the Chemistry winners for 1984.
-select yr, subject, winner from nobel where (subject='Physics' and yr=1980) 
-  or (subject='Chemistry ' and yr=1984);
 
 --# escape single quotes
 select * from nobel where winner='Eugene O''Neill'
 
 --# Show 1984 winners and subject ordered by subject and winner name; but list Chemistry and Physics last.
 SELECT winner, subject  FROM nobel  WHERE yr=1984
- ORDER BY subject IN ('Physics','Chemistry'),  subject,winner;
+ ORDER BY subject IN ('Physics','Chemistry'),  subject, winner;
  
 --# or:
 SELECT winner, subject  FROM nobel  WHERE yr=1984
@@ -60,26 +57,13 @@ SELECT winner, subject  FROM nobel  WHERE yr=1984
 SELECT yr FROM nobel
  WHERE yr NOT IN(SELECT yr FROM nobel  WHERE subject IN ('Chemistry','Physics'));
                  
+                  
 
---# shows years when a Medicine award was given but no Peace or Literature award was
-SELECT DISTINCT yr
-  FROM nobel
- WHERE subject='Medicine' 
-   AND yr NOT IN(SELECT yr FROM nobel WHERE subject in ('Literature', 'Peace');
-                   
---# shows the amount of years where no Medicine awards were given
-SELECT COUNT(DISTINCT yr) FROM nobel
- WHERE yr NOT IN (SELECT DISTINCT yr FROM nobel WHERE subject = 'Medicine');
- 
 --# Nested select
 --# List each country and its continent in the same continent as 'Brazil' or 'Mexico'.
 SELECT name, continent FROM world
 WHERE continent IN  (SELECT continent  FROM world WHERE name='Brazil'  OR name='Mexico');
-                   
---# Show the population of China as a multiple of the population of the United Kingdom
-SELECT population/(SELECT population FROM world
-             WHERE name='United Kingdom')
-  FROM world WHERE name = 'China';
+
 
 --# Show each country that has a population > the population of ALL countries in Europe.
 SELECT name FROM world
