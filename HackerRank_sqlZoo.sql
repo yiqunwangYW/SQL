@@ -1,9 +1,9 @@
--- HackerRank sql
---# Given 3 numbers, determine and output its shape
+-- HackerRank sql 
+-- Type of Triangle: Given 3 numbers, determine and output its shape
 SELECT CASE WHEN A + B > C AND B + C > A AND A + C > B THEN
                 CASE WHEN A = B AND B = C THEN 'Equilateral'
-                     WHEN A = B OR B = C OR A = C THEN 'Isosceles'
-                     ELSE 'Scalene'
+                     CASE WHEN A = B OR B = C OR A = C THEN 'Isosceles'
+                         ELSE 'Scalene'
                 END
             ELSE 'Not A Triangle'
         END
@@ -14,7 +14,7 @@ FROM TRIANGLES;
   
 SELECT name FROM world  WHERE name LIKE 'C%ia';
   
---# Find the countries that have three or more a in the nam
+--# Find the countries that have three or more a in the name
 SELECT name FROM world  WHERE name LIKE '%a%a%a%';
   
 --#Find the countries that have "t" as the second character.
